@@ -20,7 +20,7 @@ class AhadethTab extends StatelessWidget {
             flex: 3,
             child: Image.asset(AppAssets.ahadethTabLogo)),
         const Divider(thickness: 3,color: AppColors.primiary,),
-        const Text("Hadeth Name",textAlign: TextAlign.center ,style: AppTheme.tabTitleTextStyle,),
+        const Text("Hadeth Name",textAlign: TextAlign.center ,style: AppTheme.quranTabTitleTextStyle,),
         const Divider(thickness: 3,color: AppColors.primiary,),
         Expanded(flex: 7,
           child: ListView.separated(
@@ -37,7 +37,7 @@ class AhadethTab extends StatelessWidget {
                   },
                   child: Text(ahadethNames[index],
                     textAlign: TextAlign.center,
-                    style: AppTheme.tabTitleTextStyle.copyWith(fontWeight: FontWeight.normal),),
+                    style: AppTheme.quranTabTitleTextStyle.copyWith(fontWeight: FontWeight.normal),),
                 );
               }),),
       ],

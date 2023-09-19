@@ -18,9 +18,10 @@ class QuranTab extends StatelessWidget {
         Expanded(
             flex: 3,
             child: Image.asset(AppAssets.quranTabLogo)),
-        const Divider(thickness: 3,color: AppColors.primiary,),
-        const Text("Sura Name",textAlign: TextAlign.center ,style: AppTheme.tabTitleTextStyle,),
-        const Divider(thickness: 3,color: AppColors.primiary,),
+        const Divider(),
+        const Text("Sura Name",textAlign: TextAlign.center ,
+          style: AppTheme.quranTabTitleTextStyle,),
+        const Divider(),
         Expanded(flex: 7,
          child: ListView.separated(
              itemCount: Constants.suraNames.length,
@@ -36,7 +37,7 @@ class QuranTab extends StatelessWidget {
                  },
                  child: Text(Constants.suraNames[index],
                    textAlign: TextAlign.center,
-                   style: AppTheme.tabTitleTextStyle.copyWith(fontWeight: FontWeight.normal),),
+                   style: AppTheme.quranTabTitleTextStyle.copyWith(fontWeight: FontWeight.normal),),
                );
              }),),
       ],

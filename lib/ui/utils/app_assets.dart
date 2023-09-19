@@ -7,4 +7,5 @@ abstract class AppAssets{
   static const String quranTabLogo = "${assetsPath}quran_tab_logo.png";
   static const String ahadethTabLogo = "${assetsPath}ahadeth_tab_logo.png";
   static const String background = "${assetsPath}background.png";
+  static const String backgroundDark = "${assetsPath}background_dark.png";
 }

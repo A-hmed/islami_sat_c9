@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:islami_sat_c9/providers/settings_provider.dart';
 import 'package:islami_sat_c9/ui/screens/home_screen/tabs/quran_tab/quran_tab.dart';
+import 'package:islami_sat_c9/ui/screens/home_screen/tabs/settings/settings_tab.dart';
 import 'package:islami_sat_c9/ui/utils/app_assets.dart';
 import 'package:islami_sat_c9/ui/utils/app_colors.dart';
+import 'package:provider/provider.dart';
 import 'tabs/ahadeth_tab/ahadeth_tab.dart';
 import 'tabs/radio_tab/radio_tab.dart';
 import 'tabs/sebha_tab/sebha_tab.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class Home extends StatefulWidget {
   static const routeName = "home";
 
@@ -20,22 +23,21 @@ class _HomeState extends State<Home> {
     AhadethTab(),
     SebhaTab(),
     RadioTab(),
+    SettingsTab()
   ];
+  late SettingsProvider provider;
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of(context);
     return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(image: AssetImage(AppAssets.background), fit: BoxFit.fill)
+      decoration:BoxDecoration(
+        image: DecorationImage(image: AssetImage(
+            provider.currentMode == ThemeMode.light ? AppAssets.background : AppAssets.backgroundDark), fit: BoxFit.fill)
       ),
       child: Scaffold(
         backgroundColor: AppColors.transparent,
         appBar: AppBar(
-          elevation: 0,
-          centerTitle: true,
-          backgroundColor: AppColors.transparent,
-          title: const Text("Islami",
-            style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.accent, fontSize: 30),),
-        ),
+           title: Text(AppLocalizations.of(context)!.islami,)),
         body: tabs[currentTabIndex],
         bottomNavigationBar: buildBottomNavigation(),
       ),
@@ -43,20 +45,20 @@ class _HomeState extends State<Home> {
   }
 
   Widget buildBottomNavigation() => Theme(
-    data: Theme.of(context).copyWith(canvasColor: AppColors.primiary),
+    data: Theme.of(context).copyWith(canvasColor: provider.currentMode == ThemeMode.light?
+    AppColors.primiary: AppColors.primiaryDark),
     child: BottomNavigationBar(
       onTap: (index){
         currentTabIndex = index;
         setState(() {});
       },
       currentIndex: currentTabIndex,
-      selectedItemColor: AppColors.accent,
-      iconSize: 35,
-      items: const [
+      items: [
         BottomNavigationBarItem(icon: ImageIcon(AssetImage(AppAssets.icQuran)),label: "Quran"),
         BottomNavigationBarItem(icon: ImageIcon(AssetImage(AppAssets.icAhadeth)),label: "Ahadeth"),
         BottomNavigationBarItem(icon: ImageIcon(AssetImage(AppAssets.icSebha)),label: "Sebha"),
         BottomNavigationBarItem(icon: ImageIcon(AssetImage(AppAssets.icRadio)),label: "Radio"),
+        BottomNavigationBarItem(icon: Icon(Icons.settings),label: AppLocalizations.of(context)!.settings),
       ],
     ),
   );
